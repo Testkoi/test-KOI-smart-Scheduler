@@ -69,11 +69,22 @@
             </div>
         </div>
         <div class="flex items-center space-x-4">
-            <label class="flex items-center space-x-2 cursor-pointer bg-white hover:bg-gray-50 text-gray-700 px-4 py-2 rounded-lg transition-all text-sm border border-gray-200 shadow-sm hover:shadow">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
-                <span>Upload Timetable CSV</span>
-                <input type="file" id="fileInput" accept=".csv" class="hidden" />
-            </label>
+          <a href="calculator.html" class="flex items-center space-x-2 cursor-pointer bg-white hover:bg-gray-50 text-gray-700 px-4 py-2 rounded-lg transition-all text-sm border border-gray-200 shadow-sm hover:shadow no-underline">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+                <line x1="8" y1="6" x2="16" y2="6"></line>
+                <line x1="16" y1="14" x2="16" y2="14"></line>
+                <line x1="16" y1="18" x2="16" y2="18"></line>
+                <line x1="8" y1="10" x2="8" y2="10"></line>
+                <line x1="12" y1="10" x2="12" y2="10"></line>
+                <line x1="16" y1="10" x2="16" y2="10"></line>
+                <line x1="8" y1="14" x2="8" y2="14"></line>
+                <line x1="12" y1="14" x2="12" y2="14"></line>
+                <line x1="8" y1="18" x2="8" y2="18"></line>
+                <line x1="12" y1="18" x2="12" y2="18"></line>
+            </svg>
+            <span>Calculator</span>
+        </a>
         </div>
     </header>
 
@@ -1034,7 +1045,6 @@ const state = {
 
 // DOM Elements
 const el = {
-    fileInput: document.getElementById('fileInput'),
     programSelect: document.getElementById('programSelect'),
     subjectCountSelect: document.getElementById('subjectCountSelect'),
     commencingToggle: document.getElementById('commencingToggle'),
@@ -1101,15 +1111,6 @@ function init() {
 
     // Setup Calendar Grid
     renderCalendarGrid();
-
-    // Event Listeners
-    el.fileInput.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        if(!file) return;
-        const reader = new FileReader();
-        reader.onload = (ev) => loadData(ev.target.result);
-        reader.readAsText(file);
-    });
 
     el.programSelect.addEventListener('change', (e) => {
         state.selectedProgram = e.target.value;
