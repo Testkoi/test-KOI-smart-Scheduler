@@ -46,14 +46,6 @@
       .calendar-item:hover .tooltip-trigger { opacity: 1; }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script type="importmap">
-{
-  "imports": {
-    "react": "https://esm.sh/react@^19.2.4",
-    "react/": "https://esm.sh/react@^19.2.4/"
-  }
-}
-</script>
 </head>
 <body class="h-screen flex flex-col overflow-hidden">
 
@@ -83,7 +75,7 @@
                 <line x1="8" y1="18" x2="8" y2="18"></line>
                 <line x1="12" y1="18" x2="12" y2="18"></line>
             </svg>
-            <span>Calculator</span>
+            <span>Fee Calculator</span>
         </a>
         </div>
     </header>
@@ -489,7 +481,7 @@ const PREREQUISITES = {
   'ICT201': { req: [], text: 'Pre-req: 6 subjects completed', minSubjects: 6 },
   'ICT203': { req: [], text: 'Pre-req: 6 subjects completed', minSubjects: 6 },
   'ICT275': { req: [], text: 'Pre-req: 6 subjects completed', minSubjects: 6 },
-  'ICT301': { req: ['ICT204'], text: 'Pre-req: ICT204, Co-req: ICT272', coreq: ['ICT272'] },
+  'ICT301': { req: ['ICT204'], text: 'Pre-req: ICT204, (ICT302 must be enrolled in a consecutive trimester), Co-req: ICT272', coreq: ['ICT272'] },
   'ICT302': { req: ['ICT301'], text: 'Pre-req: ICT301 (Last trimester only)' },
   'ICT303': { req: [], text: 'Pre-req: 12 subjects completed', minSubjects: 12 },
   'ICT370': { req: ['BUS105'], text: 'Pre-req: BUS105' },
@@ -527,7 +519,7 @@ const PREREQUISITES = {
   'ICT703': { req: ['ICT702'], text: 'Pre-req: ICT702' },
   'ICT750': { req: [], text: 'Pre-req: 3 subjects completed', minSubjects: 3 },
   'ICT752': { req: ['ICT703'], text: 'Pre-req: 8 subjects completed, ICT703', minSubjects: 8 },
-  'ICT753': { req: ['ICT703', 'ICT750'], text: 'Pre-req: 10 subjects, ICT703, ICT750 (Last Trimester)', minSubjects: 10 },
+  'ICT753': { req: ['ICT703', 'ICT750'], text: 'Pre-req: 10 subjects, ICT703, ICT750, (Last Trimester Only)', minSubjects: 10 },
   'ICT712': { req: [], text: 'Pre-req: 4 subjects completed', minSubjects: 4 },
   'ICT726': { req: ['ICT711'], text: 'Pre-req: ICT711' },
   'ICT762': { req: ['ICT761'], text: 'Pre-req: ICT761' },
@@ -545,7 +537,7 @@ const PREREQUISITES = {
   'ICT741': { req: ['ICT722'], text: 'Pre-req: ICT722 & 8 subjects', minSubjects: 8 },
   'ICT780': { req: ['ICT740'], text: 'Pre-req: ICT740' },
   'ICT733': { req: ['ICT713', 'ICT731', 'BUS708'], text: 'Pre-req: ICT713, ICT731, BUS708' },
-  'ICT728': { req: ['ICT712', 'ICT713'], text: 'Pre-req: 8 subjects, ICT712, ICT713', minSubjects: 8 },
+  'ICT728': { req: ['ICT712', 'ICT713'], text: 'Pre-req: 8 subjects, ICT712, ICT713, ICT729 must be enrolled in consecutive trimester', minSubjects: 8 },
   'ICT729': { req: ['ICT728'], text: 'Pre-req: ICT728' },
   'ACC701': { req: ['ACC700'], text: 'Pre-req: ACC700' },
   'ACC702': { req: ['FIN700'], text: 'Pre-req: FIN700 (or ACC700/FIN700)' },
@@ -578,148 +570,186 @@ const UG_GEN_ELECTIVES = ['ACC100', 'ACC101', 'ACC200', 'BUS101', 'BUS104', 'BUS
 // --- PROGRAM DEFINITIONS ---
 const PROGRAMS = [
   { 
-    name: 'Master of Accounting', type: 'PG', 
-    coreSubjects: ['BUS709', 'ACC701', 'FIN700', 'BUS708', 'ACC702', 'ACC704', 'ACC705', 'ACC703', 'ACC706', 'ACC707', 'ACC708', 'BUS707'], 
-    electiveSubjects: [],
-    maxElectives: 0
-  },
-  { 
-    name: 'Master of Professional Accounting', type: 'PG', 
-    coreSubjects: ['BUS709', 'ACC700', 'BUS700', 'BUS702', 'BUS708', 'ACC701', 'FIN700', 'ACC704', 'ACC702', 'ACC703', 'ACC705', 'ACC707', 'ACC708', 'ACC706', 'BUS711'], 
-    electiveSubjects: ['ACC709', 'ACC710', 'ACC711', 'MBA901', 'MBA902', 'MBA903', 'MBA904', 'ICT761', 'ICT700'],
-    maxElectives: 1
-  },
-  { 
-    name: 'Master of IT (Standard - 15 Subj)', type: 'PG', 
-    coreSubjects: ['BUS708', 'BUS709', 'ICT710', 'ICT711', 'ICT712', 'ICT713', 'ICT725', 'ICT726', 'ICT727'], 
-    electiveSubjects: [...PG_IT_ELECTIVES, ...PG_GEN_ELECTIVES],
-    maxElectives: 6
-  },
-  { 
-    name: 'Master of IT (Data Analytics)', type: 'PG', 
-    coreSubjects: ['BUS708', 'BUS709', 'ICT710', 'ICT711', 'ICT712', 'ICT713', 'ICT724', 'ICT761', 'ICT762', 'ICT731', 'ICT734', 'ICT727', 'ICT732'], 
-    electiveSubjects: ['ICT722', 'ICT723', 'ICT725', 'ICT726', 'ICT740', 'ICT741', 'ICT742', 'ICT743', 'ICT780', 'ICT772', 'ICT730', 'ICT733', ...PG_GEN_ELECTIVES],
-    maxElectives: 6
-  },
-  { 
-    name: 'Master of IT (Cybersecurity)', type: 'PG', 
-    coreSubjects: ['BUS708', 'BUS709', 'ICT710', 'ICT711', 'ICT712', 'ICT713', 'ICT722', 'ICT740', 'ICT730', 'ICT742', 'ICT743', 'ICT727', 'ICT772'], 
-    electiveSubjects: ['ICT723', 'ICT724', 'ICT725', 'ICT726', 'ICT731', 'ICT761', 'ICT762', 'ICT741', 'ICT780', ...PG_GEN_ELECTIVES],
-    maxElectives: 6
-  },
-  { 
-    name: 'Master of IT (16 Subjects)', type: 'PG', 
-    coreSubjects: ['BUS708', 'BUS709', 'ICT710', 'ICT711', 'ICT712', 'ICT713', 'ICT728', 'ICT729'], 
-    electiveSubjects: [...PG_IT_ELECTIVES, ...PG_GEN_ELECTIVES],
-    maxElectives: 6
-  },
-  { 
-    name: 'Graduate Diploma of IT', type: 'PG', 
-    coreSubjects: ['BUS708', 'BUS709', 'ICT710', 'ICT711', 'ICT712', 'ICT713'], 
-    electiveSubjects: PG_IT_ELECTIVES,
-    maxElectives: 2
-  },
-  { 
-    name: 'Graduate Certificate of IT', type: 'PG', 
-    coreSubjects: ['BUS709', 'ICT710', 'ICT711'], 
-    electiveSubjects: PG_IT_ELECTIVES,
-    maxElectives: 1
-  },
-  { 
     name: 'Master of Information Systems (Business Analytics)', type: 'PG', 
     coreSubjects: ['MGT700', 'ICT700', 'ICT701', 'ICT702', 'ICT761', 'ICT703', 'ICT751', 'ICT750', 'ICT722', 'ICT752', 'ICT753', 'ICT762', 'ICT724'], 
     electiveSubjects: ['ICT723', 'ICT725', 'ICT772', 'ICT741', 'BUS700', 'BUS702', 'BUS707', 'ACC700', 'FIN700'],
-    maxElectives: 3
+    maxElectives: 3,
+    electiveRules: { total: 3, maxICT: 1, maxGeneral: 1, minIS: 1, isList: ['ICT772', 'ICT741'] }
   },
   { 
     name: 'Master of Information Systems (Information Security)', type: 'PG', 
     coreSubjects: ['MGT700', 'ICT700', 'ICT701', 'ICT702', 'ICT761', 'ICT703', 'ICT751', 'ICT750', 'ICT722', 'ICT752', 'ICT753', 'ICT772', 'ICT741'], 
     electiveSubjects: ['ICT723', 'ICT725', 'ICT762', 'ICT724', 'BUS700', 'BUS702', 'BUS707', 'ACC700', 'FIN700'],
-    maxElectives: 3
+    maxElectives: 3,
+    electiveRules: { total: 3, maxGeneral: 1, minIS: 1, isList: ['ICT762', 'ICT724'] }
+  },
+  { 
+    name: 'Master of Accounting', type: 'PG', 
+    coreSubjects: ['BUS709', 'ACC701', 'FIN700', 'BUS708', 'ACC702', 'ACC704', 'ACC705', 'ACC703', 'ACC706', 'ACC707', 'ACC708', 'BUS707'], 
+    electiveSubjects: [],
+    maxElectives: 0,
+    electiveRules: { total: 0 }
+  },
+  { 
+    name: 'Master of Professional Accounting', type: 'PG', 
+    coreSubjects: ['BUS709', 'ACC700', 'BUS700', 'BUS702', 'BUS708', 'ACC701', 'FIN700', 'ACC704', 'ACC702', 'ACC703', 'ACC705', 'ACC707', 'ACC708', 'ACC706', 'BUS711'], 
+    electiveSubjects: ['ACC709', 'MBA901', 'MBA902', 'MBA903', 'MBA904', 'ICT761', 'ICT700'],
+    maxElectives: 1,
+    electiveRules: { total: 1 }
+  },
+  { 
+    name: 'Master of IT (15 Subj - T126 commencing)', type: 'PG', 
+    coreSubjects: ['BUS708', 'BUS709', 'ICT710', 'ICT711', 'ICT712', 'ICT713', 'ICT725', 'ICT726', 'ICT727'], 
+    electiveSubjects: ['ICT722', 'ICT723', 'ICT724', 'ICT725', 'ICT740', 'ICT726', 'ICT731', 'ICT733', 'ICT741', 'BUS700', 'BUS702', 'ACC700', 'FIN700', 'ICT761', 'ICT772', 'ICT780'],
+    maxElectives: 6,
+    electiveRules: { total: 6, maxGeneral: 1, minICT: 4 }
+  },
+  { 
+    name: 'Master of IT (16 Subjects - T325 commencing or earlier)', type: 'PG', 
+    coreSubjects: ['BUS708', 'BUS709', 'ICT710', 'ICT711', 'ICT712', 'ICT713', 'ICT728', 'ICT729'], 
+    electiveSubjects: ['ICT722', 'ICT723', 'ICT724', 'ICT725', 'ICT740', 'ICT726', 'ICT731', 'ICT733', 'ICT741','BUS700', 'BUS702', 'BUS707', 'ACC700', 'ACC701', 'FIN700', 'ACC703', 'ACC704','ICT761', 'ICT772', 'ICT780'],
+    maxElectives: 8,
+    electiveRules: { total: 8, maxGeneral: 2, minICT: 6 }
+  },
+  { 
+    name: 'Master of IT (Data Analytics - T126)', type: 'PG', 
+    coreSubjects: ['BUS708', 'BUS709', 'ICT710', 'ICT711', 'ICT712', 'ICT713', 'ICT724', 'ICT761', 'ICT762', 'ICT731', 'ICT734', 'ICT727', 'ICT732'], 
+    electiveSubjects: ['ICT722', 'ICT723', 'ICT725', 'ICT726', 'ICT740', 'ICT741', 'ICT742', 'ICT743', 'ICT780', 'ICT772', 'ICT730', 'ICT733', 'ACC700', 'BUS700', 'BUS702', 'BUS707', 'FIN700'],
+    maxElectives: 2,
+    electiveRules: { total: 2 }
+  },
+  {
+    name: 'Master of IT (Data Analytics - T325 Commencing or earlier)', type: 'PG', 
+    coreSubjects: ['BUS708', 'BUS709', 'ICT710', 'ICT711', 'ICT712', 'ICT713', 'ICT724', 'ICT761', 'ICT762', 'ICT731', 'ICT734', 'ICT728', 'ICT729', 'ICT732'], 
+    electiveSubjects: ['ICT722', 'ICT723', 'ICT725', 'ICT726', 'ICT740', 'ICT733', 'ACC700', 'BUS700', 'BUS702', 'BUS707', 'FIN700'],
+    maxElectives: 2,
+    electiveRules: { total: 2 }
+  },
+  { 
+    name: 'Master of IT (Cybersecurity - T126)', type: 'PG', 
+    coreSubjects: ['BUS708', 'BUS709', 'ICT710', 'ICT711', 'ICT712', 'ICT713', 'ICT722', 'ICT740', 'ICT730', 'ICT742', 'ICT743', 'ICT727', 'ICT772'], 
+    electiveSubjects: ['ICT723', 'ICT724', 'ICT725', 'ICT726', 'ICT731', 'ICT761', 'ICT762', 'ICT741', 'ICT780', 'ACC700', 'BUS700', 'BUS702', 'FIN700'],
+    maxElectives: 2,
+    electiveRules: { total: 2 }
+  },
+  { 
+    name: 'Master of IT (Cybersecurity - T325 commencing or earlier)', type: 'PG', 
+    coreSubjects: ['BUS708', 'BUS709', 'ICT710', 'ICT711', 'ICT712', 'ICT713', 'ICT722', 'ICT740', 'ICT730', 'ICT742', 'ICT743', 'ICT728', 'ICT772', 'ICT729'], 
+    electiveSubjects: ['ICT723', 'ICT724', 'ICT725', 'ICT726', 'ICT731', 'ICT761', 'ICT762', 'ICT741', 'ICT780', 'ACC700', 'BUS700', 'BUS702', 'FIN700', 'BUS707'],
+    maxElectives: 2,
+    electiveRules: { total: 2 }
+  },
+  { 
+    name: 'Graduate Diploma of IT', type: 'PG', 
+    coreSubjects: ['BUS708', 'BUS709', 'ICT710', 'ICT711', 'ICT712', 'ICT713'], 
+    electiveSubjects: ['ICT722', 'ICT723', 'ICT724', 'ICT725', 'ICT726'],
+    maxElectives: 2,
+    electiveRules: { total: 2 }
+  },
+  { 
+    name: 'Graduate Certificate of IT', type: 'PG', 
+    coreSubjects: ['BUS709', 'ICT710', 'ICT711'], 
+    electiveSubjects: ['ICT722', 'ICT723', 'ICT724', 'ICT725'],
+    maxElectives: 1,
+    electiveRules: { total: 1 }
   },
   { 
     name: 'Graduate Diploma of Info Systems', type: 'PG', 
     coreSubjects: ['MGT700', 'ICT700', 'ICT701', 'ICT702', 'ICT761', 'ICT703', 'ICT751', 'ICT750'], 
     electiveSubjects: [],
-    maxElectives: 0
+    maxElectives: 0,
+    electiveRules: { total: 0 }
   },
   { 
     name: 'Graduate Certificate of Info Systems', type: 'PG', 
     coreSubjects: ['BUS709', 'ICT703', 'ICT701', 'ICT702'], 
     electiveSubjects: [],
-    maxElectives: 0
+    maxElectives: 0,
+    electiveRules: { total: 0 }
   },
   { 
     name: 'Master of Arts (TESOL)', type: 'PG', 
     coreSubjects: ['TSL700', 'TSL713', 'TSL702', 'TSL704', 'TSL719', 'TSL705', 'TSL720', 'TSL718', 'TSL715'], 
-    electiveSubjects: ['TSL717', 'TSL709', 'TSL711', 'TSL712', 'TSL716', 'TSL721', 'TSL703', 'ICT710', 'BUS708', 'BUS700', 'BUS702', 'BUS709'],
-    maxElectives: 3
+    electiveSubjects: ['TSL717', 'TSL709', 'TSL711', 'TSL712', 'TSL716', 'TSL721', 'TSL703', 'ICT710', 'BUS708', 'BUS700', 'BUS702', 'BUS709', 'ACC700', 'FIN700', 'MGT702'],
+    maxElectives: 3,
+    electiveRules: { total: 3 }
   },
   { 
     name: 'Master of Arts (TESOL) (Professional)', type: 'PG', 
     coreSubjects: ['TSL700', 'TSL713', 'TSL702', 'TSL704', 'TSL719', 'TSL705', 'TSL720', 'TSL718', 'TSL715'], 
-    electiveSubjects: ['TSL717', 'TSL709', 'TSL711', 'TSL712', 'TSL716', 'TSL721', 'TSL703', 'ICT710', 'BUS708', 'BUS700', 'BUS702', 'BUS709'],
-    maxElectives: 4
+    electiveSubjects: ['TSL717', 'TSL709', 'TSL711', 'TSL712', 'TSL716', 'TSL721', 'TSL703', 'ICT710', 'BUS708', 'BUS700', 'BUS702', 'BUS709', 'ACC700', 'FIN700', 'MGT702'],
+    maxElectives: 7,
+    electiveRules: { total: 7 }
   },
   { 
     name: 'Graduate Diploma of TESOL', type: 'PG', 
     coreSubjects: ['TSL700', 'TSL713', 'TSL702', 'TSL704', 'TSL719', 'TSL705', 'TSL720', 'TSL718'], 
     electiveSubjects: [],
-    maxElectives: 0
+    maxElectives: 0,
+    electiveRules: { total: 0 }
   },
   { 
     name: 'Graduate Certificate of TESOL', type: 'PG', 
     coreSubjects: ['TSL700', 'TSL718', 'TSL719', 'TSL720'], 
     electiveSubjects: [],
-    maxElectives: 0
+    maxElectives: 0,
+    electiveRules: { total: 0 }
   },
   { 
     name: 'Graduate Diploma of Business', type: 'PG', 
-    coreSubjects: [], 
-    electiveSubjects: ['ACC700', 'BUS700', 'BUS702', 'BUS709', 'ACC701', 'FIN700', 'MGT702', 'BUS705', 'MGT708', 'BUS708', 'ACC704', 'MGT704', 'MGT707'],
-    maxElectives: 8 
+    coreSubjects: ['ACC700', 'BUS700', 'BUS702', 'BUS709', 'ACC701', 'FIN700', 'MGT702', 'BUS705', 'MGT708'], 
+    electiveSubjects: ['BUS708', 'ACC704', 'MGT704', 'MGT707'],
+    maxElectives: 2,
+    electiveRules: { total: 2 }
   },
   { 
     name: 'Graduate Certificate in Business', type: 'PG', 
     coreSubjects: [], 
     electiveSubjects: ['ACC700', 'BUS700', 'BUS702', 'BUS708', 'BUS709', 'MGT708'],
-    maxElectives: 4
+    maxElectives: 4,
+    electiveRules: { total: 4 }
   },
   { 
     name: 'Bachelor of IT', type: 'UG', 
     coreSubjects: ['BUS100', 'ICT100', 'ICT101', 'ICT102', 'ICT103', 'ICT104', 'ICT106', 'BUS105', 'ICT200', 'ICT201', 'ICT204', 'ICT203', 'ICT205', 'ICT272', 'ICT302', 'ICT301', 'ICT303', 'ICT370'], 
-    electiveSubjects: [...UG_IT_ELECTIVES, ...UG_GEN_ELECTIVES],
-    maxElectives: 6
+    electiveSubjects: ['ACC100', 'ACC101', 'ACC200', 'BUS101', 'BUS104', 'BUS300', 'BUS304', 'BUS302', 'FIN200', 'FIN201', 'FIN203', 'MGT100', 'MGT200', 'MGT201', 'MGT202', 'MGT203', 'MGT300', 'MGT301', 'MGT302', ...UG_IT_ELECTIVES],
+    maxElectives: 6,
+    electiveRules: { total: 6, maxGeneral: 3, minICT: 3 }
   },
   { 
     name: 'Bachelor of Business (Accounting)', type: 'UG', 
     coreSubjects: ['BUS100', 'MGT100', 'ACC100', 'BUS104', 'ECO100', 'BUS105', 'ACC101', 'BUS101', 'ACC200', 'ACC201', 'FIN200', 'MGT200', 'ACC202', 'ACC203', 'BUS200', 'ACC204', 'ACC301', 'ACC303', 'ACC300', 'BUS303'], 
     electiveSubjects: [...UG_GEN_ELECTIVES],
-    maxElectives: 4
+    maxElectives: 4,
+    electiveRules: { total: 4 }
   },
   { 
     name: 'Bachelor of Business (Mgt & Fin)', type: 'UG', 
     coreSubjects: ['BUS100', 'ACC100', 'ECO100', 'BUS104', 'MGT100', 'BUS105', 'MGT200', 'BUS101', 'MGT203', 'FIN200', 'ACC200', 'FIN203', 'BUS300', 'ICT274', 'FIN201', 'BUS302', 'MGT302', 'BUS303', 'MGT300', 'FIN300'], 
-    electiveSubjects: [...UG_GEN_ELECTIVES],
-    maxElectives: 4
+    electiveSubjects: ['ACC101', 'ACC201', 'ACC202', 'ACC203', 'ACC204', 'ACC301', 'BUS200', 'BUS304', 'MGT201', 'MGT202', 'MGT301', 'FIN204'],
+    maxElectives: 4,
+    electiveRules: { total: 4 }
   },
   { 
     name: 'Diploma of IT', type: 'UG', 
     coreSubjects: ['BUS100', 'ICT100', 'ICT102', 'ICT103', 'ICT106', 'BUS105'], 
-    electiveSubjects: ['ICT101', 'ICT104', 'ICT205', 'ICT274', ...UG_GEN_ELECTIVES],
-    maxElectives: 2
+    electiveSubjects: ['ICT101', 'ICT104', 'ICT205', 'ICT274', 'ACC100', 'BUS101', 'BUS104', 'MGT100', 'MGT203'],
+    maxElectives: 2,
+    electiveRules: { total: 2, minICT: 1 }
   },
   { 
     name: 'Diploma of Accounting', type: 'UG', 
     coreSubjects: ['BUS100', 'ACC100', 'BUS104', 'ECO100', 'MGT100', 'ACC101', 'BUS101', 'BUS105'], 
     electiveSubjects: [],
-    maxElectives: 0
+    maxElectives: 0,
+    electiveRules: { total: 0 }
   },
   { 
     name: 'Diploma of Management', type: 'UG', 
     coreSubjects: ['BUS100', 'BUS104', 'ECO100', 'MGT100', 'ACC100', 'BUS105', 'BUS101', 'MGT200'], 
     electiveSubjects: [],
-    maxElectives: 0
+    maxElectives: 0,
+    electiveRules: { total: 0 }
   }
 ];
 
@@ -734,10 +764,6 @@ function getSubjectsForProgram(availableSubjects, programName) {
     const core = rawCore.filter(s => availableSubjects.includes(s));
     const electives = rawElectives.filter(s => availableSubjects.includes(s));
     
-    // For programs like GD Business where core is a choice, assume all choices are available if needed
-    if(program.name.includes('Graduate Diploma of Business') || program.name.includes('Graduate Certificate in Business')) {
-       // Logic remains same as filter above handles it
-    }
     return { 
         core, 
         electives, 
@@ -969,15 +995,6 @@ function findValidCombinations(allSessions, compatibleSubjectCodes, lockedSubjec
     const pool = compatibleSubjectCodes.filter(c => !lockedSubjectCodes.includes(c));
     const needed = targetCount - lockedSubjectCodes.length;
 
-    // Strict Elective Check for combinations
-    const lockedElectives = lockedSubjectCodes.filter(s => electiveConstraint.validElectives.includes(s)).length;
-    const initialElectiveSlots = electiveConstraint.remainingSlots - lockedElectives;
-
-    if (initialElectiveSlots < 0) {
-        // User manually selected more than allowed?
-        return [];
-    }
-
     if (needed <= 0) {
         return generateSchedules(allSessions, lockedSubjectCodes, prefs);
     }
@@ -994,10 +1011,44 @@ function findValidCombinations(allSessions, compatibleSubjectCodes, lockedSubjec
         if (currentSet.length === needed) {
             tests++;
             
-            // Check if this combination exceeds elective limits
-            const currentElectives = currentSet.filter(s => electiveConstraint.validElectives.includes(s)).length;
-            if (currentElectives > initialElectiveSlots) {
-                return; // Skip invalid combination
+            // Check Elective Constraints for the combination
+            let addedTotal = 0;
+            let addedGeneral = 0;
+            let addedIS = 0;
+
+            for (const subj of currentSet) {
+                if (electiveConstraint.rawElectives.includes(subj)) {
+                    addedTotal++;
+                    if (!electiveConstraint.isICT(subj)) {
+                        addedGeneral++;
+                    }
+                    if (electiveConstraint.isList && electiveConstraint.isList.includes(subj)) {
+                        addedIS++;
+                    }
+                }
+            }
+
+            // Reject if Total Electives exceeded
+            if ((electiveConstraint.currentTotal + addedTotal) > electiveConstraint.maxTotal) return;
+            
+            // Reject if General Electives exceeded
+            if (electiveConstraint.maxGeneral !== undefined && 
+               (electiveConstraint.currentGeneral + addedGeneral) > electiveConstraint.maxGeneral) {
+                return;
+            }
+
+            // Reject if Min IS not met - ONLY if we have maxed out the total elective allowance
+            // This prevents blocking students from taking other subjects in early trimesters
+            if (electiveConstraint.minIS > 0) {
+                 const totalAfter = electiveConstraint.currentTotal + addedTotal;
+                 const isAfter = electiveConstraint.currentIS + addedIS;
+                 
+                 // If we have reached (or exceeded) the cap, we MUST have satisfied the minimums
+                 if (totalAfter >= electiveConstraint.maxTotal) {
+                     if (isAfter < electiveConstraint.minIS) {
+                         return;
+                     }
+                 }
             }
 
             const fullSubjectList = [...lockedSubjectCodes, ...currentSet];
@@ -1302,15 +1353,43 @@ function renderSubjectList() {
     }
     const { core, electives, maxElectives, rawElectives } = getSubjectsForProgram(state.allSubjectCodes, state.selectedProgram);
     
-    // Count passed electives
-    // A subject counts as a passed elective if it is in the raw elective list for the program
-    const passedElectivesCount = state.completedSubjects.filter(s => rawElectives.includes(s)).length;
+    // --- RULES & LOGIC FOR ELECTIVES ---
+    const program = PROGRAMS.find(p => p.name === state.selectedProgram);
+    const rules = program.electiveRules || {};
     
-    // Remaining allowance
-    const remainingElectivesAllowed = Math.max(0, maxElectives - passedElectivesCount);
+    // Determine constraints
+    let maxGeneral = rules.maxGeneral;
+    let minICT = rules.minICT || 0;
+    const minIS = rules.minIS || 0;
+    const isList = rules.isList || [];
+
+    if (maxGeneral === undefined) {
+        maxGeneral = Math.max(0, maxElectives - minICT);
+    }
+
+    const isICT = (c) => c.startsWith('ICT');
+
+    // 1. Analyze COMPLETED subjects (Passed)
+    const passedElectives = state.completedSubjects.filter(s => rawElectives.includes(s));
+    const passedGeneralCount = passedElectives.filter(s => !isICT(s)).length;
+    const passedICTCount = passedElectives.filter(s => isICT(s)).length;
+    const passedISCount = passedElectives.filter(s => isList.includes(s)).length;
+
+    // 2. Analyze SELECTED subjects
+    const selectedElectives = state.selectedSubjects.filter(s => rawElectives.includes(s));
+    const selectedGeneralCount = selectedElectives.filter(s => !isICT(s)).length;
+    const selectedICTCount = selectedElectives.filter(s => isICT(s)).length;
+    const selectedISCount = selectedElectives.filter(s => isList.includes(s)).length;
     
-    // Count currently selected electives from the UI
-    const selectedElectiveCount = electives.filter(e => state.selectedSubjects.includes(e)).length;
+    // 3. Totals
+    const totalUsed = passedElectives.length + selectedElectives.length;
+    const generalUsed = passedGeneralCount + selectedGeneralCount;
+    const ictUsed = passedICTCount + selectedICTCount;
+    const isUsed = passedISCount + selectedISCount;
+
+    // 4. Remaining
+    const remainingTotal = Math.max(0, maxElectives - totalUsed);
+    const remainingGeneral = Math.max(0, maxGeneral - generalUsed);
     
     el.subjectListContainer.innerHTML = '';
 
@@ -1331,31 +1410,56 @@ function renderSubjectList() {
 
     const renderGroup = (title, items, isElectiveGroup) => {
         if(items.length === 0) return;
-        const header = document.createElement('div');
-        header.className = `px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider flex items-center ${isElectiveGroup ? 'bg-gray-100 text-gray-600 border-y border-gray-200 mt-4' : 'bg-indigo-50 text-indigo-800 border-b border-indigo-100 sticky top-0 z-10'}`;
-        header.innerHTML = isElectiveGroup ? 
-            `<div class="flex-1 flex justify-between items-center">
-               <div class="flex items-center"><svg class="w-3 h-3 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg> Electives</div>
-               <span class="bg-gray-200 px-1.5 rounded text-[9px] ${remainingElectivesAllowed === 0 ? 'text-red-600' : 'text-gray-600'}">${selectedElectiveCount}/${remainingElectivesAllowed} remaining</span>
-             </div>` : 
-            `<svg class="w-3 h-3 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg> Core Subjects`;
         
-        // Add error banner for electives
-        if(isElectiveGroup) {
-             el.subjectListContainer.appendChild(header);
-             if(remainingElectivesAllowed === 0) {
+        let headerHTML = '';
+        if (isElectiveGroup) {
+            let badges = `<div class="bg-slate-100 text-slate-600 px-2 py-1 rounded text-[10px] font-bold border border-slate-200">TOTAL: ${totalUsed}/${maxElectives}</div>`;
+            
+            if (minIS > 0) {
+                 badges = `<div class="bg-purple-100 text-purple-600 px-2 py-1 rounded text-[10px] font-bold border border-purple-200">IS Spec: ${isUsed}/${minIS}</div> ` + badges;
+            }
+            if (maxGeneral > 0 || minICT > 0) {
+                 badges = `<div class="bg-slate-100 text-slate-600 px-2 py-1 rounded text-[10px] font-bold border border-slate-200">GEN: ${generalUsed}/${maxGeneral}</div> ` + badges;
+            }
+
+            headerHTML = `
+                <div class="mt-6 mb-2">
+                    <div class="px-2 mb-2 flex items-center text-xs font-bold text-slate-500 uppercase tracking-wider">
+                        <svg class="w-3.5 h-3.5 mr-1.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                        Electives
+                    </div>
+                    <div class="flex items-center space-x-2 px-2 flex-wrap gap-y-1">
+                        ${badges}
+                    </div>
+                </div>
+            `;
+        } else {
+            // Core Header
+            headerHTML = `
+                <div class="bg-indigo-50 text-indigo-800 border-b border-indigo-100 sticky top-0 z-10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider flex items-center">
+                    <svg class="w-3 h-3 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg> 
+                    Core Subjects
+                </div>
+            `;
+        }
+
+        const container = document.createElement('div');
+        container.innerHTML = headerHTML;
+        el.subjectListContainer.appendChild(container);
+
+        // Global Warning messages
+        if (isElectiveGroup) {
+             if(remainingTotal === 0) {
                  const warning = document.createElement('div');
-                 warning.className = "text-[10px] bg-red-50 text-red-800 px-3 py-2 border-b border-red-100 flex items-start leading-tight";
-                 warning.innerHTML = `You have completed the maximum number of electives (${maxElectives}) for this program.`;
+                 warning.className = "text-[10px] bg-red-50 text-red-800 px-3 py-2 border-b border-red-100 flex items-start leading-tight mx-2 mt-1 rounded";
+                 warning.innerHTML = `Max electives (${maxElectives}) reached.`;
                  el.subjectListContainer.appendChild(warning);
-             } else if(selectedElectiveCount >= remainingElectivesAllowed) {
+             } else if(remainingGeneral === 0 && remainingTotal > 0 && maxGeneral > 0) {
                  const warning = document.createElement('div');
-                 warning.className = "text-[10px] bg-amber-50 text-amber-800 px-3 py-2 border-b border-amber-100 flex items-start leading-tight";
-                 warning.innerHTML = `Limit reached. Deselect an elective to choose another.`;
+                 warning.className = "text-[10px] bg-amber-50 text-amber-800 px-3 py-2 border-b border-amber-100 flex items-start leading-tight mx-2 mt-1 rounded";
+                 warning.innerHTML = `General electives limit reached (${maxGeneral}). Select ICT subjects.`;
                  el.subjectListContainer.appendChild(warning);
              }
-        } else {
-             el.subjectListContainer.appendChild(header);
         }
 
         items.forEach(code => {
@@ -1363,18 +1467,19 @@ function renderSubjectList() {
             const meta = getSubjectMetadata(code);
             const name = state.processedSessions.find(s => s.subjectCode === code)?.subjectName || '';
             const reqCheck = checkPrerequisites(code, state.completedSubjects);
+            const isISSpec = isList.includes(code);
             
             let isLocked = !state.isCommencing && !reqCheck.met;
             let lockReason = reqCheck.missing.length > 0 ? reqCheck.missing.join(', ') : 'Prerequisites not met';
             
-            // Elective Limit Logic
+            // Elective Limit Logic (Proactive Locking)
             if(isElectiveGroup && !isSelected) {
-                if (remainingElectivesAllowed === 0) {
-                    isLocked = true;
-                    lockReason = 'Max program electives completed';
-                } else if (selectedElectiveCount >= remainingElectivesAllowed) {
-                    isLocked = true;
-                    lockReason = 'Selection limit reached';
+                if (remainingTotal <= 0) {
+                     isLocked = true;
+                     lockReason = 'Max electives reached';
+                } else if (!isICT(code) && remainingGeneral <= 0 && maxGeneral > 0) {
+                     isLocked = true;
+                     lockReason = `General limit reached`;
                 }
             }
 
@@ -1389,11 +1494,14 @@ function renderSubjectList() {
 
             // Logic for badges
             let badgeHTML = '';
+            if(isISSpec) {
+                badgeHTML += `<span class="text-[9px] bg-purple-50 text-purple-600 px-1.5 py-0.5 rounded border border-purple-100 flex items-center font-bold mr-1">IS Elective</span>`;
+            }
             if(meta.isCapstone) {
-                badgeHTML += `<span class="text-[9px] bg-red-50 text-red-600 px-1.5 py-0.5 rounded border border-red-100 flex items-center font-semibold mr-1"><svg class="w-2 h-2 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg> Capstone</span>`;
+                badgeHTML += `<span class="text-[9px] bg-red-50 text-red-600 px-1.5 py-0.5 rounded border border-red-100 flex items-center font-semibold mr-1">Capstone</span>`;
             }
             if(isLocked) {
-                const icon = lockReason.includes('reached') || lockReason.includes('completed') ? 
+                const icon = lockReason.includes('reached') || lockReason.includes('allowed') ? 
                     '<svg class="w-2 h-2 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>' : 
                     '<svg class="w-2 h-2 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>';
                 badgeHTML += `<span class="text-[9px] bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded border border-gray-200 flex items-center" title="${lockReason}">${icon} ${lockReason}</span>`;
@@ -1417,8 +1525,21 @@ function renderSubjectList() {
             `;
             if(!isLocked) {
                 div.addEventListener('click', () => {
-                    if(isSelected) state.selectedSubjects = state.selectedSubjects.filter(s => s !== code);
-                    else state.selectedSubjects.push(code);
+                    if (isSelected) {
+                        state.selectedSubjects = state.selectedSubjects.filter(s => s !== code);
+                    } else {
+                        if (isElectiveGroup) {
+                            if (remainingTotal <= 0) {
+                                showNotification(`Maximum ${maxElectives} electives allowed.`, 'error');
+                                return;
+                            }
+                            if (!isICT(code) && remainingGeneral <= 0 && maxGeneral > 0) {
+                                showNotification(`You can only select ${maxGeneral} Non-ICT electives.`, 'error');
+                                return;
+                            }
+                        }
+                        state.selectedSubjects.push(code);
+                    }
                     renderSubjectList();
                     updateGenerateButton();
                 });
@@ -1431,30 +1552,6 @@ function renderSubjectList() {
     renderGroup('Electives', validElectives, true);
     
     el.selectedCount.textContent = `${state.selectedSubjects.length}/${state.targetSubjectCount}`;
-}
-
-function updateGenerateButton() {
-    const valid = state.selectedProgram !== '';
-    if(valid) {
-        el.btnGenerate.disabled = false;
-        el.btnGenerate.classList.remove('bg-gray-300', 'cursor-not-allowed');
-        el.btnGenerate.classList.add('bg-indigo-600', 'hover:bg-indigo-700', 'active:scale-95');
-        
-        const needed = Math.max(0, state.targetSubjectCount - state.selectedSubjects.length);
-        if(needed > 0) {
-            el.btnGenerate.textContent = `AUTO-FILL & GENERATE (${state.targetSubjectCount})`;
-            el.generateHint.textContent = `System will automatically add ${needed} subject(s) to reach full load.`;
-            el.generateHint.classList.remove('hidden');
-        } else {
-            el.btnGenerate.textContent = "GENERATE TIMETABLES";
-            el.generateHint.classList.add('hidden');
-        }
-    } else {
-        el.btnGenerate.disabled = true;
-        el.btnGenerate.classList.add('bg-gray-300', 'cursor-not-allowed');
-        el.btnGenerate.classList.remove('bg-indigo-600', 'hover:bg-indigo-700', 'active:scale-95');
-        el.generateHint.classList.add('hidden');
-    }
 }
 
 function openCompletedModal() {
@@ -1517,6 +1614,31 @@ function openCompletedModal() {
     createSection('Electives', electives, 'text-gray-700 bg-gray-200');
 }
 
+function updateGenerateButton() {
+    const valid = state.selectedProgram !== '';
+    if(valid) {
+        el.btnGenerate.disabled = false;
+        el.btnGenerate.classList.remove('bg-gray-300', 'cursor-not-allowed');
+        el.btnGenerate.classList.add('bg-indigo-600', 'hover:bg-indigo-700', 'active:scale-95');
+        
+        const needed = Math.max(0, state.targetSubjectCount - state.selectedSubjects.length);
+        if(needed > 0) {
+            el.btnGenerate.textContent = `AUTO-FILL & GENERATE (${state.targetSubjectCount})`;
+            el.generateHint.textContent = `System will automatically add ${needed} subject(s) to reach full load.`;
+            el.generateHint.classList.remove('hidden');
+        } else {
+            el.btnGenerate.textContent = "GENERATE TIMETABLES";
+            el.generateHint.classList.add('hidden');
+        }
+    } else {
+        el.btnGenerate.disabled = true;
+        el.btnGenerate.classList.add('bg-gray-300', 'cursor-not-allowed');
+        el.btnGenerate.classList.remove('bg-indigo-600', 'hover:bg-indigo-700', 'active:scale-95');
+        el.generateHint.classList.add('hidden');
+        el.btnGenerate.textContent = "GENERATE TIMETABLES";
+    }
+}
+
 function handleGenerate() {
     el.btnGenerate.innerHTML = '<div class="loader"></div>';
     el.btnGenerate.disabled = true;
@@ -1530,6 +1652,28 @@ function handleGenerate() {
             preferredDays: [] 
         };
 
+        // Determine Elective Rules
+        const program = PROGRAMS.find(p => p.name === state.selectedProgram);
+        const rules = program.electiveRules || {};
+        let maxGeneral = rules.maxGeneral;
+        let minICT = rules.minICT || 0;
+        const minIS = rules.minIS || 0;
+        const isList = rules.isList || [];
+
+        if (maxGeneral === undefined) {
+            maxGeneral = Math.max(0, maxElectives - minICT);
+        }
+
+        const isICT = (c) => c.startsWith('ICT');
+
+        // Usage Counts (Passed + Selected)
+        const passedElectives = state.completedSubjects.filter(s => rawElectives.includes(s));
+        const selectedElectives = state.selectedSubjects.filter(s => rawElectives.includes(s));
+        
+        const currentGeneralCount = [...passedElectives, ...selectedElectives].filter(s => !isICT(s)).length;
+        const currentTotalCount = passedElectives.length + selectedElectives.length;
+        const currentISCount = [...passedElectives, ...selectedElectives].filter(s => isList.includes(s)).length;
+
         let sessionsToSolve = state.processedSessions;
         if(state.filterMode === 'specific') {
             sessionsToSolve = sessionsToSolve.filter(s => state.availableDays.includes(s.day));
@@ -1539,21 +1683,38 @@ function handleGenerate() {
         if(state.selectedSubjects.length < state.targetSubjectCount) {
              const canAdd = (code) => {
                  if(state.completedSubjects.includes(code)) return false;
+                 
+                 // Prerequisite Check
                  const check = checkPrerequisites(code, state.completedSubjects);
                  if(!check.met && !state.isCommencing) return false;
+                 
+                 // Elective Cap Check (Pruning)
+                 if (rawElectives.includes(code)) {
+                     // If it's an elective, checking total cap
+                     if (currentTotalCount >= maxElectives) return false;
+                     // If it's a general elective, check general cap
+                     if (!isICT(code) && maxGeneral !== undefined && currentGeneralCount >= maxGeneral) {
+                         return false; 
+                     }
+                 }
+                 
                  return true;
              };
+
              const validCores = core.filter(canAdd);
              const validElectives = electives.filter(canAdd);
              const candidatePool = [...validCores, ...validElectives];
              
-             // Calculate elective constraint for auto-fill
-             const passedElectivesCount = state.completedSubjects.filter(s => rawElectives.includes(s)).length;
-             const remainingElectiveSlots = Math.max(0, maxElectives - passedElectivesCount);
-             
              const electiveConstraint = {
-                 validElectives: rawElectives, // Use full elective list for checking
-                 remainingSlots: remainingElectiveSlots
+                 rawElectives: rawElectives,
+                 isICT: isICT,
+                 maxGeneral: maxGeneral,
+                 maxTotal: maxElectives,
+                 currentGeneral: currentGeneralCount,
+                 currentTotal: currentTotalCount,
+                 minIS: minIS,
+                 currentIS: currentISCount,
+                 isList: isList
              };
 
              results = findValidCombinations(sessionsToSolve, candidatePool, state.selectedSubjects, state.targetSubjectCount, prefs, electiveConstraint);
